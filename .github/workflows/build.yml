@@ -1,0 +1,37 @@
+name: Build Electron App
+
+on:
+  push:
+    branches: [ main ] # mainブランチにpushされたら自動起動
+
+jobs:
+  build:
+    runs-on: windows-latest # ここが重要！GitHub側のWindowsマシンでビルドします
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js
+        run: npm run build
+
+      - name: Build Electron App
+        run: npx electron-builder --win portable
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Kaya-Widget-EXE
+          path: dist/*.exe
+          
