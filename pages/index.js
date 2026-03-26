@@ -126,7 +126,7 @@ export default function KayaWidget() {
           </div>
 
           <div className="center-content">
-            <h1 className="main-title">Kaya</h1>
+            <h1 className="main-title">かやさん</h1>
             <div className="character-tag">{currentPhoto?.character || '---'}</div>
           </div>
 
