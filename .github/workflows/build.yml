@@ -2,11 +2,15 @@ name: Build Electron App
 
 on:
   push:
-    branches: [ main ] # mainブランチにpushされたら自動起動
+    branches: [ main ]
 
 jobs:
   build:
-    runs-on: windows-latest # ここが重要！GitHub側のWindowsマシンでビルドします
+    runs-on: windows-latest
+    # ★ここを追加：すべてのコマンドを widget フォルダ内で実行するように指定
+    defaults:
+      run:
+        working-directory: apps/widget
 
     steps:
       - name: Checkout code
@@ -17,6 +21,8 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+          # キャッシュも widget 内の package-lock.json を見るように修正
+          cache-dependency-path: apps/widget/package-lock.json
 
       - name: Install dependencies
         run: npm install
@@ -33,5 +39,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Kaya-Widget-EXE
-          path: dist/*.exe
-          
+          path: apps/widget/dist/*.exe # ★パスを修正
