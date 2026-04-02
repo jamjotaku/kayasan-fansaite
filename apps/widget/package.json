@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Kaya Fan System Widget",
   "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jamjotaku/kayasan-fansaite.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -35,6 +39,6 @@
     "electron-builder": "latest"
   },
   "keywords": [],
-  "author": "Your Name",
+  "author": "jamjotaku",
   "license": "ISC"
 }
